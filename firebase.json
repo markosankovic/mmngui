@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/mmngui",
+    "public": "dist/mmngui/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
