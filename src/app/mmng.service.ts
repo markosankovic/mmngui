@@ -11,8 +11,8 @@ export class MmngService {
 
   constructor(private http: HttpClient) { }
 
-  initMaster() {
-    return this.http.get<void>(`${this.baseUrl}/master/init`);
+  initMaster(ifname: string) {
+    return this.http.get<void>(`${this.baseUrl}/master/init/${ifname}`);
   }
 
   deinitMaster() {
@@ -24,7 +24,11 @@ export class MmngService {
   }
 
   getSlaveState(id: number) {
-    return this.http.get<{ state: number }>(`${this.baseUrl}/slaves/${id}/get-state`);
+    return this.http.get<number>(`${this.baseUrl}/slaves/${id}/state`);
+  }
+
+  setSlaveState(id: number, state: number) {
+    return this.http.get<void>(`${this.baseUrl}/slaves/${id}/state/${state}`);
   }
 
 }

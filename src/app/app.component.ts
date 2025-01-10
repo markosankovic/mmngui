@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Observable, of } from 'rxjs';
 import { Slave } from './types';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -33,12 +33,27 @@ export class AppComponent {
 
   slaves$: Observable<Slave[]> = of([]);
 
-  slaveFormControl = new FormControl<number>(0);
+  ifnameFormControl = new FormControl<string>('enx1c1adff64fae', [Validators.required]);
 
-  slaveState$: Observable<{ state: number } | null> = of(null);
+  slaveFormControl = new FormControl<number>(0, [Validators.required]);
+
+  stateFormControl = new FormControl<number>(0, [Validators.required]);
+
+  slaveState$: Observable<number | null> = of(null);
+
+  states = {
+    "INIT": 1,
+    "PREOP": 2,
+    "BOOT": 3,
+    "SAFEOP": 4,
+    "OP": 8,
+  };
 
   onInitMaster() {
-    this.mmng.initMaster().subscribe();
+    const ifname = this.ifnameFormControl.value;
+    if (ifname) {
+      this.mmng.initMaster(ifname).subscribe();
+    }
   }
 
   onDeinitMaster() {
@@ -52,6 +67,12 @@ export class AppComponent {
   onGetSlaveState() {
     const id = this.slaveFormControl.value ?? 0;
     this.slaveState$ = this.mmng.getSlaveState(id);
+  }
+
+  onSetSlaveState() {
+    const id = this.slaveFormControl.value ?? 0;
+    const state = this.stateFormControl.value ?? 0;
+    this.mmng.setSlaveState(id, state).subscribe();
   }
 
 }
