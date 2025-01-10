@@ -35,7 +35,7 @@ export class AppComponent {
 
   slaveFormControl = new FormControl<number>(0);
 
-  slaveState$: Observable<{ state: number }> = of({ state: 0 });
+  slaveState$: Observable<{ state: number } | null> = of(null);
 
   onInitMaster() {
     this.mmng.initMaster().subscribe();
