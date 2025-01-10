@@ -23,4 +23,8 @@ export class MmngService {
     return this.http.get<Slave[]>(`${this.baseUrl}/slaves`);
   }
 
+  getSlaveState(id: number) {
+    return this.http.get<{ state: number }>(`${this.baseUrl}/slaves/${id}/get-state`);
+  }
+
 }

@@ -14,6 +14,26 @@
     </div>
   </div>
 
+  <div class="flex flex-col gap-2">
+    <form class="w-full">
+      <mat-form-field class="w-full">
+        <mat-label>Slave</mat-label>
+        <input type="number" matInput [formControl]="slaveFormControl">
+        <mat-hint>Enter the slave index, starting from 0 for the first slave.</mat-hint>
+        @if (slaveFormControl.hasError('required')) {
+        <mat-error>Slave is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </div>
+
+  <hr>
+
+  <div class="flex gap-2 items-center">
+    <button mat-raised-button (click)="onGetSlaveState()">GET SLAVE STATE</button>
+    <div>{{slaveState$ | async | json}}</div>
+  </div>
+
   <hr>
 
 </div>
