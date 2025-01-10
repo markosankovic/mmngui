@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Slave } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +12,15 @@ export class MmngService {
   constructor(private http: HttpClient) { }
 
   initMaster() {
-    this.http.get<void>(`${this.baseUrl}/master/init`).subscribe();
+    return this.http.get<void>(`${this.baseUrl}/master/init`);
   }
 
   deinitMaster() {
-    this.http.get<void>(`${this.baseUrl}/master/deinit`).subscribe();
+    return this.http.get<void>(`${this.baseUrl}/master/deinit`);
+  }
 
+  getSlaves() {
+    return this.http.get<Slave[]>(`${this.baseUrl}/slaves`);
   }
 
 }

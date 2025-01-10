@@ -1,2 +1,21 @@
-<button mat-raised-button (click)="onInitMaster()">INIT MASTER</button>
-<button mat-raised-button (click)="onDeinitMaster()">DEINIT MASTER</button>
+<div class="p-4 flex flex-col gap-y-4">
+
+  <div class="flex gap-2">
+    <button mat-raised-button (click)="onInitMaster()">INIT MASTER</button>
+    <button mat-raised-button (click)="onDeinitMaster()">DEINIT MASTER</button>
+  </div>
+
+  <hr>
+
+  <div class="flex flex-col gap-2">
+    <button mat-raised-button (click)="onGetSlaves()">GET SLAVES</button>
+    <div>
+      <pre>{{slaves$ | async | json}}</pre>
+    </div>
+  </div>
+
+  <hr>
+
+</div>
+
+<router-outlet></router-outlet>
