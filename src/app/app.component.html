@@ -22,7 +22,26 @@
   <div class="flex flex-col gap-2">
     <button mat-raised-button (click)="onGetSlaves()">GET SLAVES</button>
     <div>
-      <pre>{{slaves$ | async | json}}</pre>
+      <table>
+        <thead>
+          <tr>
+            <th class="p-2">#</th>
+            <th class="p-2">name</th>
+            <th class="p-2">position</th>
+            <th class="p-2">state</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (slave of slaves$ | async; let i = $index; track $index;) {
+          <tr>
+            <td class="p-2">{{i}}</td>
+            <td class="p-2">{{slave.name}}</td>
+            <td class="p-2">{{slave.position}}</td>
+            <td class="p-2">{{slave.state}}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -65,6 +84,44 @@
   </div>
 
   <hr>
+
+  <div class="flex flex-col gap-2">
+    <div class="flex gap-2">
+      <button mat-raised-button (click)="onLoadParameters()">LOAD PARAMETERS</button>
+      <button mat-raised-button (click)="onClearParameters()">CLEAR PARAMETERS</button>
+      <button mat-raised-button (click)="onGetParameters()">GET PARAMETERS</button>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th class="p-2">#</th>
+            <th class="p-2">index</th>
+            <th class="p-2">subindex</th>
+            <th class="p-2">name</th>
+            <th class="p-2">bitLength</th>
+            <th class="p-2">dataType</th>
+            <th class="p-2">objAccess</th>
+            <th class="p-2">objectCode</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (parameter of parameters$ | async; let i = $index; track $index;) {
+          <tr>
+            <td class="p-2">{{i}}</td>
+            <td class="p-2">0x{{parameter.index.toString(16)}}</td>
+            <td class="p-2">0x{{parameter.subindex.toString(16)}}</td>
+            <td class="p-2">{{parameter.name}}</td>
+            <td class="p-2">{{parameter.bitLength}}</td>
+            <td class="p-2">{{parameter.dataType}}</td>
+            <td class="p-2">{{parameter.objAccess}}</td>
+            <td class="p-2">{{parameter.objectCode}}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </div>
 

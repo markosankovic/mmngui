@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Observable, of } from 'rxjs';
-import { Slave } from './types';
+import { Parameter, Slave } from './types';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -41,6 +41,8 @@ export class AppComponent {
 
   slaveState$: Observable<number | null> = of(null);
 
+  parameters$: Observable<Parameter[]> = of([]);
+
   states = {
     "INIT": 1,
     "PREOP": 2,
@@ -73,6 +75,21 @@ export class AppComponent {
     const id = this.slaveFormControl.value ?? 0;
     const state = this.stateFormControl.value ?? 0;
     this.mmng.setSlaveState(id, state).subscribe();
+  }
+
+  onLoadParameters() {
+    const id = this.slaveFormControl.value ?? 0;
+    this.mmng.loadParameters(id).subscribe();
+  }
+
+  onClearParameters() {
+    const id = this.slaveFormControl.value ?? 0;
+    this.mmng.clearParameters(id).subscribe();
+  }
+
+  onGetParameters() {
+    const id = this.slaveFormControl.value ?? 0;
+    this.parameters$ = this.mmng.getParameters(id);
   }
 
 }

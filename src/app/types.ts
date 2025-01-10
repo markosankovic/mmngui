@@ -1,5 +1,15 @@
 export interface Slave {
-  id: number;
+  name: number;
+  position: string;
+  state: string;
+}
+
+export interface Parameter {
   name: string;
-  status: string;
+  index: number;
+  bitLength: number;
+  dataType: number;
+  objAccess: number;
+  subindex: number;
+  objectCode: number;
 }

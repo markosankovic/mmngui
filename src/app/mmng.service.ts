@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Slave } from './types';
+import { Parameter, Slave } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +29,18 @@ export class MmngService {
 
   setSlaveState(id: number, state: number) {
     return this.http.get<void>(`${this.baseUrl}/slaves/${id}/state/${state}`);
+  }
+
+  loadParameters(id: number) {
+    return this.http.get<void>(`${this.baseUrl}/slaves/${id}/load-parameters`);
+  }
+
+  clearParameters(id: number) {
+    return this.http.get<void>(`${this.baseUrl}/slaves/${id}/clear-parameters`);
+  }
+
+  getParameters(id: number) {
+    return this.http.get<Parameter[]>(`${this.baseUrl}/slaves/${id}/parameters`);
   }
 
 }
