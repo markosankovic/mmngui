@@ -13,4 +13,12 @@ import { MatButtonModule } from '@angular/material/button';
 export class AppComponent {
   title = 'mmngui';
   mmng = inject(MmngService);
+
+  onInitMaster() {
+    this.mmng.initMaster();
+  }
+
+  onDeinitMaster() {
+    this.mmng.deinitMaster();
+  }
 }
