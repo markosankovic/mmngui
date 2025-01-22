@@ -3,6 +3,14 @@
   <div class="flex flex-col gap-2">
     <form class="w-full">
       <mat-form-field class="w-full">
+        <mat-label>Base URL</mat-label>
+        <input type="text" matInput [formControl]="baseUrlFormControl">
+        <mat-hint>Enter the base URL like "https://localhost:9000".</mat-hint>
+        @if (ifnameFormControl.hasError('required')) {
+        <mat-error>Base URL is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="w-full">
         <mat-label>Interface name</mat-label>
         <input type="text" matInput [formControl]="ifnameFormControl">
         <mat-hint>Enter the network interface name like "enx1c1adff64fae".</mat-hint>

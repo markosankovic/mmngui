@@ -7,7 +7,7 @@ import { Parameter, Slave } from './types';
 })
 export class MmngService {
 
-  readonly baseUrl = 'https://localhost:9000';
+  baseUrl = 'https://localhost:9000';
 
   constructor(private http: HttpClient) { }
 
