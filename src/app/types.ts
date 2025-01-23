@@ -8,6 +8,7 @@ export interface Parameter {
   name: string;
   index: number;
   bitLength: number;
+  byteLength: number;
   dataType: number;
   objAccess: number;
   subindex: number;
