@@ -68,13 +68,6 @@
 
   <hr>
 
-  <div class="flex gap-2 items-center">
-    <button mat-raised-button (click)="onGetSlaveState()">GET SLAVE STATE</button>
-    <div>{{slaveState$ | async | json}}</div>
-  </div>
-
-  <hr>
-
   <div class="flex flex-col gap-2">
     <form class="w-full">
       <mat-form-field class="w-full">
@@ -89,6 +82,11 @@
     <div>
       <button mat-raised-button (click)="onSetSlaveState()">SET SLAVE STATE</button>
     </div>
+  </div>
+
+  <div class="flex gap-2 items-center">
+    <button mat-raised-button (click)="onGetSlaveState()">GET SLAVE STATE</button>
+    <div>{{slaveState$ | async | json}}</div>
   </div>
 
   <hr>
