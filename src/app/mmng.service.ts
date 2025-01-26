@@ -43,4 +43,12 @@ export class MmngService {
     return this.http.get<Parameter[]>(`${this.baseUrl}/slaves/${id}/parameters`);
   }
 
+  upload(id: number, index: number, subindex: number) {
+    return this.http.get<number | string>(`${this.baseUrl}/slaves/${id}/upload/${index}/${subindex}`);
+  }
+
+  download(id: number, index: number, subindex: number, value: number | string) {
+    return this.http.get<void>(`${this.baseUrl}/slaves/${id}/download/${index}/${subindex}/${value}`);
+  }
+
 }

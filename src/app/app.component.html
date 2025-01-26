@@ -131,6 +131,35 @@
     </div>
   </div>
 
+  <form class="w-full flex gap-2" [formGroup]="parameterForm">
+    <mat-form-field>
+      <mat-label>Index</mat-label>
+      <input type="string" matInput formControlName="index">
+      <mat-hint>Enter the index in hexadecimal format.</mat-hint>
+      @if (parameterForm.get('index')?.hasError('required')) {
+      <mat-error>Index is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Subindex</mat-label>
+      <input type="string" matInput formControlName="subindex">
+      <mat-hint>Enter the subindex in decimal format.</mat-hint>
+      @if (parameterForm.get('subindex')?.hasError('required')) {
+      <mat-error>Subindex is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Value</mat-label>
+      <input type="string" matInput formControlName="value">
+      <mat-hint>Enter the value in decimal format.</mat-hint>
+      @if (parameterForm.get('value')?.hasError('required')) {
+      <mat-error>Value is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    <button mat-raised-button (click)="onSetParameterValue()">SET VALUE</button>
+    <button mat-raised-button (click)="onGetParameterValue()">GET VALUE</button>
+    <div>{{parameterValue}}</div>
+  </form>
 </div>
 
 <router-outlet></router-outlet>

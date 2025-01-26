@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { catchError, Observable, of } from 'rxjs';
 import { Parameter, Slave } from './types';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +41,14 @@ export class AppComponent implements OnInit {
   slaveFormControl = new FormControl<number>(0, [Validators.required]);
 
   stateFormControl = new FormControl<number>(0, [Validators.required]);
+
+  parameterValue: any;
+
+  parameterForm = new FormGroup({
+    'index': new FormControl<string>('0x1018', [Validators.required]),
+    'subindex': new FormControl<string>('1', [Validators.required]),
+    'value': new FormControl<string>('0', [Validators.required]),
+  });
 
   slaveState$: Observable<number | null> = of(null);
 
@@ -143,6 +151,35 @@ export class AppComponent implements OnInit {
         return of([]);
       }),
     );
+  }
+
+  parseParameterFormInputs() {
+    const index = parseInt(this.parameterForm.get('index')?.value ?? '', 16);
+    const subindex = parseInt(this.parameterForm.get('subindex')?.value ?? '', 10);
+    const value = parseInt(this.parameterForm.get('value')?.value ?? '', 10);
+    return { index, subindex, value };
+  }
+
+  onGetParameterValue() {
+    const id = this.slaveFormControl.value ?? 0;
+    const { index, subindex } = this.parseParameterFormInputs();
+    this.mmng.upload(id, index, subindex).pipe(
+      catchError((err) => {
+        this._snackBar.open(err.message, 'Error');
+        return of(null);
+      }),
+    ).subscribe((value) => this.parameterValue = value);
+  }
+
+  onSetParameterValue() {
+    const id = this.slaveFormControl.value ?? 0;
+    const { index, subindex, value } = this.parseParameterFormInputs();
+    this.mmng.download(id, index, subindex, value).pipe(
+      catchError((err) => {
+        this._snackBar.open(err.message, 'Error');
+        return of(null);
+      }),
+    ).subscribe();
   }
 
 }
